@@ -14,8 +14,17 @@ export const serveCommand = new Command()
     try {
       const dir = path.join(process.cwd(), path.dirname(filename));
       await serve(parseInt(options.port), path.basename(filename), dir);
-      
-    } catch (error) {
-      console.log(error.message)
+      console.log(
+        `${filename} is served. Navigate to http://localhost:${options.port} to edit the file.`
+      );
+    } catch (err) {
+      if (err.code === "EADDRINUSE") {
+        console.error(
+          `Port ${options.port} already in use.\nTry running on a different port:\n> serve -p <port-number>`
+        );
+      } else {
+        console.log("There was a problme running the command", err.message);
+      }
+      process.exit(1);
     }
   });
