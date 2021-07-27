@@ -8,6 +8,8 @@ export const serve = (port: number, filename: string, dir: string, isProxy: bool
   const app = express();
   const packagePath = require.resolve('local-client/build/index.html')
 
+  app.use(createCellsRouter(filename, dir))
+
   if (isProxy) {
     app.use(createProxyMiddleware({
       target: 'http://localhost:3000',
@@ -17,8 +19,6 @@ export const serve = (port: number, filename: string, dir: string, isProxy: bool
   } else {
     app.use(express.static(path.dirname(packagePath)))
   }
-
-  app.use(createCellsRouter(filename, dir))
 
   return new Promise<void>((resolve, reject) => {
     app.listen(port, resolve).on('error', reject)
