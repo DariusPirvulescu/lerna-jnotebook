@@ -2,6 +2,8 @@ import { Command } from "commander";
 import path from "path";
 import { serve } from "local-api";
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export const serveCommand = new Command()
   .command("serve [filename]")
   .description("Open file for editing")
@@ -10,7 +12,21 @@ export const serveCommand = new Command()
     "specify the port where to run the server",
     "4005"
   )
-  .action((filename = "notebook.js", options: { port: string }) => {
-    const dir = path.join(process.cwd(), path.dirname(filename));
-    serve(parseInt(options.port), path.basename(filename), dir);
+  .action(async (filename = "notebook.js", options: { port: string }) => {
+    try {
+      const dir = path.join(process.cwd(), path.dirname(filename));
+      await serve(parseInt(options.port), path.basename(filename), dir, !isProduction);
+      console.log(
+        `${filename} is served. Navigate to http://localhost:${options.port} to edit the file.`
+      );
+    } catch (err) {
+      if (err.code === "EADDRINUSE") {
+        console.error(
+          `Port ${options.port} already in use.\nTry running on a different port:\n> serve -p <port-number>`
+        );
+      } else {
+        console.log("There was a problme running the command", err.message);
+      }
+      process.exit(1);
+    }
   });
