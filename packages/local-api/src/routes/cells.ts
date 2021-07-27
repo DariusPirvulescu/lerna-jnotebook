@@ -7,7 +7,7 @@ import fs from 'fs/promises'
 interface Cell {
   id: string;
   content: string;
-  type: 'text'|'code';
+  type: 'text' | 'code';
 }
 
 export const createCellsRouter = (filename: string, dir: string) => {
@@ -38,7 +38,7 @@ export const createCellsRouter = (filename: string, dir: string) => {
 
     await fs.writeFile(fullPath, JSON.stringify(cells), 'utf-8')
 
-
+    res.send({ status: 'ok' })
   })
 
   return router
