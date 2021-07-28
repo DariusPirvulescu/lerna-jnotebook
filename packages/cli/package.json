@@ -1,6 +1,6 @@
 {
   "name": "plutonote",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "files": [
     "dist"
@@ -17,10 +17,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@plutonote/local-client": "^1.0.3"
+    "@plutonote/local-client": "^1.0.4"
   },
   "devDependencies": {
-    "@plutonote/local-api": "^1.0.3",
+    "@plutonote/local-api": "^1.0.4",
     "@types/node": "^16.3.3",
     "commander": "^8.0.0",
     "esbuild": "0.8.26",
