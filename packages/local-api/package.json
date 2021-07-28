@@ -1,12 +1,18 @@
 {
-  "name": "local-api",
-  "version": "1.0.0",
+  "name": "@plutonote/local-api",
+  "version": "1.0.4",
   "description": "",
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "tsc --watch --preserveWatchOutput",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "tsc"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +23,10 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "@plutonote/local-client": "^1.0.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "http-proxy-middleware": "^2.0.1",
-    "local-client": "^0.1.0"
-  }
+    "http-proxy-middleware": "^2.0.1"
+  },
+  "gitHead": "4a4e3866c26a8a2b5b18fe9e2d2c71a072c47866"
 }
