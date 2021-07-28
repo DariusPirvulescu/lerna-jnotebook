@@ -2,9 +2,17 @@
   "name": "plutonote",
   "version": "1.0.0",
   "description": "",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "tsc --watch --preserveWatchOutput"
+    "start": "tsc --watch --preserveWatchOutput",
+    "prepublishOnly": "tsc"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": "dist/index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
